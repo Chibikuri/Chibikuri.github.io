@@ -7,12 +7,15 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./app
     steps:
-    - uses: actions/checkout@v2
+    - name: setup
+      uses: actions/checkout@v2
     - run: rustup target add wasm32-unknown-unknown
     - run: cargo install trunk
     - name: build with trunk
-      working-directory: ./app
       run: trunk build --release --public-url Chibikuri.github.io
     - run: cp -r ./dist/ ./public/
     - uses: peaceiris/actions-gh-pages@v3
