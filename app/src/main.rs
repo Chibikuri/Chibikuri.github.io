@@ -5,6 +5,7 @@ pub mod pages {
     pub mod footer;
     pub mod header;
     pub mod home;
+    pub mod tech_notes_index;
 }
 
 pub mod components {

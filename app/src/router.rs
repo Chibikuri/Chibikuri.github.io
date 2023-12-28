@@ -2,15 +2,16 @@ use yew::prelude::*;
 use yew_router::prelude::*;
 
 use crate::pages::home::Home;
+use crate::pages::tech_notes_index::TechNoteIndex;
 
 #[derive(Clone, Routable, PartialEq)]
 pub enum Route {
     #[at("/")]
     Home,
     #[at("/tech_blog")]
-    TechBlogIndex,
+    TechNoteIndex,
     #[at("/tech_blog/:id")]
-    TechBlog { id: u32 },
+    TechNote { id: u32 },
     #[not_found]
     #[at("/404")]
     NotFound, // This should be only for debugging
@@ -19,22 +20,9 @@ pub enum Route {
 pub fn switch(routes: Route) -> Html {
     match routes {
         Route::Home => html! {<Home/> },
-        Route::TechBlogIndex => html! {<TechBlogIndex/>},
-        Route::TechBlog { id } => html! { <h1> {"tech blog"} </h1>},
+        Route::TechNoteIndex => html! {<TechNoteIndex/>},
+        Route::TechNote { id } => html! { <h1> {"tech blog"} </h1>},
         Route::NotFound => html! {<h1> {"not found"}</h1>},
-    }
-}
-
-#[function_component(TechBlogIndex)]
-pub fn tech_blog_index() -> Html {
-    let navigator = use_navigator().unwrap();
-
-    let onclick = Callback::from(move |_| navigator.push(&Route::Home));
-    html! {
-        <div>
-          <h1>{"Test"}</h1>
-          <button {onclick}>{"Home"}</button>
-        </div>
     }
 }
 
