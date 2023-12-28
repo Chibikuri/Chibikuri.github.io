@@ -19,7 +19,8 @@ jobs:
     - run: cargo install trunk
     - name: build with trunk
       run: trunk build --release
-    - uses: peaceiris/actions-gh-pages@v3
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
       if: ${{ github.ref == 'refs/heads/main' }}
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
