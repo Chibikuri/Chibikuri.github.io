@@ -1,21 +1,30 @@
 use yew::prelude::*;
+use yew_router::prelude::*;
+mod router;
+pub mod pages {
+    pub mod footer;
+    pub mod header;
+    pub mod home;
+}
 
-#[function_component]
-fn App() -> Html {
-    let counter = use_state(|| 0);
-    let onclick = {
-        let counter = counter.clone();
-        move |_| {
-            let value = *counter + 1;
-            counter.set(value);
-        }
-    };
+pub mod components {
+    pub mod list;
+    pub mod summary;
+}
 
+use pages::footer::Footer;
+use pages::header::Header;
+
+#[function_component(App)]
+fn app() -> Html {
     html! {
-        <div>
-            <button {onclick}>{ "+1" }</button>
-            <p>{ *counter }</p>
-        </div>
+        <>
+        <BrowserRouter>
+            <Header/>
+            <router::Navi/>
+            <Footer/>
+        </BrowserRouter>
+        </>
     }
 }
 
