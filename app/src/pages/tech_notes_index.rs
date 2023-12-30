@@ -2,12 +2,12 @@ use yew::prelude::*;
 use std::path::PathBuf;
 use crate::markdown_parser::parse_markdown;
 
-fn get_test() -> Html{
-    let path = PathBuf::from("notes/test.md");
-    let contents = parse_markdown(path);
-    let inner = Html::from_html_unchecked(AttrValue::from(contents));
-    inner
-}
+// fn get_test() -> Html{
+//     let path = PathBuf::from("notes/test.md");
+//     let contents = parse_markdown(path);
+//     let inner = Html::from_html_unchecked(AttrValue::from(contents));
+//     inner
+// }
 
 #[function_component(TechNoteIndex)]
 pub fn tech_note_index() -> Html {
@@ -15,7 +15,6 @@ pub fn tech_note_index() -> Html {
         <OutlineView>
           <Card title="test" outline="test"/>
           <Card title="test" outline="test"/>
-          {get_test()}
         </OutlineView>
     }
 }
