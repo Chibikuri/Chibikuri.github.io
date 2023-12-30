@@ -31,9 +31,3 @@ pub fn list_item(item_prop: &ItemProp) -> Html {
         <li>{format!("{}", item_prop.value.clone())}</li>
     }
 }
-
-impl PartialEq for ListItem {
-    fn eq(&self, other: &Self) -> bool {
-        true
-    }
-}
