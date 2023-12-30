@@ -1,5 +1,6 @@
 use yew::prelude::*;
 use yew_router::prelude::*;
+pub mod markdown_parser;
 mod router;
 pub mod pages {
     pub mod footer;

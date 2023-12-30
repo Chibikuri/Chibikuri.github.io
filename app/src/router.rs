@@ -8,9 +8,9 @@ use crate::pages::tech_notes_index::TechNoteIndex;
 pub enum Route {
     #[at("/")]
     Home,
-    #[at("/tech_blog")]
+    #[at("/tech_note")]
     TechNoteIndex,
-    #[at("/tech_blog/:id")]
+    #[at("/tech_note/:id")]
     TechNote { id: u32 },
     #[not_found]
     #[at("/404")]
