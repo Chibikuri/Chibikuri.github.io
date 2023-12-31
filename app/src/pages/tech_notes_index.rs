@@ -1,20 +1,19 @@
+use crate::fetcher;
+use crate::router::Route;
 use yew::prelude::*;
-use std::path::PathBuf;
-use crate::markdown_parser::parse_markdown;
-
-// fn get_test() -> Html{
-//     let path = PathBuf::from("notes/test.md");
-//     let contents = parse_markdown(path);
-//     let inner = Html::from_html_unchecked(AttrValue::from(contents));
-//     inner
-// }
+use yew_router::prelude::*;
 
 #[function_component(TechNoteIndex)]
 pub fn tech_note_index() -> Html {
+    let articles = vec![(String::from("test"), String::from("test"), 0)];
+    let outline_view = articles.iter().map(|(article_title, outline, id)| {
+        html! {
+            <Card title={article_title.clone()} outline={outline.clone()} id={id.clone()}/>
+        }
+    });
     html! {
         <OutlineView>
-          <Card title="test" outline="test"/>
-          <Card title="test" outline="test"/>
+        {for outline_view}
         </OutlineView>
     }
 }
@@ -35,13 +34,16 @@ pub fn outline_view(outline_view_props: &OutlineViewProps) -> Html {
 pub struct CardProps {
     pub title: String,
     pub outline: String,
+    pub id: u32,
 }
 
 #[function_component(Card)]
 pub fn card_view(props: &CardProps) -> Html {
     html! {
-        <div class="card">
-          <h5><b>{props.title.clone()}</b></h5>
-        </div>
+        <Link<Route> to={Route::TechNote{id: props.id}}>
+            <div class="card">
+                <h5><b>{props.title.clone()}</b></h5>
+            </div>
+        </Link<Route>>
     }
 }

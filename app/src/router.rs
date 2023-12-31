@@ -1,7 +1,11 @@
+use std::collections::HashMap;
+
 use yew::prelude::*;
 use yew_router::prelude::*;
 
+use crate::fetcher::fetch::prefetch_contents;
 use crate::pages::home::Home;
+use crate::pages::tech_note::TechNote;
 use crate::pages::tech_notes_index::TechNoteIndex;
 
 #[derive(Clone, Routable, PartialEq)]
@@ -18,10 +22,15 @@ pub enum Route {
 }
 
 pub fn switch(routes: Route) -> Html {
+    let contents_url = "https://github.com/Chibikuri/tech_note_contents/blob/main/contents/index.json";
+    let articles = prefetch_contents(contents_url);
     match routes {
         Route::Home => html! {<Home/> },
         Route::TechNoteIndex => html! {<TechNoteIndex/>},
-        Route::TechNote { id } => html! { <h1> {"tech blog"} </h1>},
+        Route::TechNote { id } => {
+            let contents = articles.get(&id).unwrap();
+            html! { <TechNote contents={contents.clone()}/>}
+        }
         Route::NotFound => html! {<h1> {"not found"}</h1>},
     }
 }
